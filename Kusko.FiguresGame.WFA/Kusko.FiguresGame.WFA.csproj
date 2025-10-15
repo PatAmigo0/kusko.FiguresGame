@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F10FA3CB-91CF-4452-AC87-FB22ED44FF39}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Kusko.FiguresGame.WFA</RootNamespace>
+    <AssemblyName>Kusko.FiguresGame.WFA</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Engine\Core\IResizeable.cs" />
+    <Compile Include="Engine\Core\IMoveable.cs" />
+    <Compile Include="Engine\Core\ChangeableFigure.cs" />
+    <Compile Include="Engine\GameFigure.cs" />
+    <Compile Include="Engine\GameFigureFabric.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DrawLib.Platform\DrawLib.Platform.csproj">
+      <Project>{b8a21d5d-3222-48c2-9a73-11dcbe422d23}</Project>
+      <Name>DrawLib.Platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FiguresLib.Core\FiguresLib.Core.csproj">
+      <Project>{eafc9ed4-1c98-4a1f-81c8-d402b3294730}</Project>
+      <Name>FiguresLib.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FiguresLib.Tests\FiguresLib.Tests.csproj">
+      <Project>{51bd4b8a-05ed-49cf-aa96-f3d78755e7a6}</Project>
+      <Name>FiguresLib.Tests</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
