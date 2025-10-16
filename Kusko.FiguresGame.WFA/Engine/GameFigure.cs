@@ -1,5 +1,6 @@
 ﻿using FiguresLib.Core;
 using Kusko.FiguresGame.WFA.Engine.Core;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace Kusko.FiguresGame.WFA.Engine
@@ -27,6 +28,7 @@ namespace Kusko.FiguresGame.WFA.Engine
         public void Update(Color backgroundColor)
         {
             if (!IsAlive()) return;
+
 
             if (Shape is IMoveable moveableShape)
                 moveableShape.Move(Velocity.X, Velocity.Y);

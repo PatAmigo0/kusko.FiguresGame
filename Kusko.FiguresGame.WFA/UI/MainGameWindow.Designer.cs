@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.scoreLabel = new System.Windows.Forms.Label();
+            this.lifesLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // scoreLabel
             // 
-            this.scoreLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.scoreLabel.AutoSize = true;
             this.scoreLabel.Location = new System.Drawing.Point(65, 62);
             this.scoreLabel.Name = "scoreLabel";
@@ -42,11 +42,21 @@
             this.scoreLabel.Text = "scoreLabel";
             this.scoreLabel.Click += new System.EventHandler(this.label1_Click);
             // 
+            // lifesLabel
+            // 
+            this.lifesLabel.AutoSize = true;
+            this.lifesLabel.Location = new System.Drawing.Point(68, 103);
+            this.lifesLabel.Name = "lifesLabel";
+            this.lifesLabel.Size = new System.Drawing.Size(25, 13);
+            this.lifesLabel.TabIndex = 1;
+            this.lifesLabel.Text = "lifes";
+            // 
             // MainGameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1023, 635);
+            this.Controls.Add(this.lifesLabel);
             this.Controls.Add(this.scoreLabel);
             this.Name = "MainGameWindow";
             this.Text = "MainGameWindow";
@@ -59,5 +69,6 @@
         #endregion
 
         private System.Windows.Forms.Label scoreLabel;
+        private System.Windows.Forms.Label lifesLabel;
     }
 }

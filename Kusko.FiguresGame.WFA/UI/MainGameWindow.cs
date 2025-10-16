@@ -19,6 +19,7 @@ namespace Kusko.FiguresGame.WFA
 
             this.BackColor = Color.FromArgb(45, 45, 48);
             scoreLabel.ForeColor = Color.White;
+            lifesLabel.ForeColor = Color.White;
 
             this.Paint += new PaintEventHandler(MainGameWindow_Paint);
             this.MouseClick += new MouseEventHandler(MainGameWindow_MouseClick);
@@ -27,7 +28,7 @@ namespace Kusko.FiguresGame.WFA
 
         private void MainGameWindow_Load(object sender, EventArgs e)
         {
-            _engine = new GameEngine(this.ClientSize.Width, this.ClientSize.Height, this.BackColor, scoreLabel);
+            _engine = new GameEngine(this.ClientSize.Width, this.ClientSize.Height, this.BackColor, scoreLabel, lifesLabel);
             _gameTimer = new Timer
             {
                 Interval = (int)(1000.0 / 30)

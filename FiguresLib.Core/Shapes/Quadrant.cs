@@ -21,9 +21,7 @@ namespace FiguresLib.Core.Shapes
             bool isContain = false;
 
             if ((point.X >= Points[0].X) && (point.X <= Points[1].X) && (point.Y <= Points[1].Y) && (point.Y >= Points[0].Y))
-            {
                 isContain = true;
-            }
 
             return isContain;
         }

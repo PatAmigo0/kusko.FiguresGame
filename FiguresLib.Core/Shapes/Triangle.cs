@@ -36,13 +36,12 @@ namespace FiguresLib.Core.Shapes
             
         public override double Square()
         {
-            double square = 0;
             double side1 = this.Side(new Point[] { this.Points[0], this.Points[1] });
             double side2 = this.Side(new Point[] { this.Points[0], this.Points[2] });
             double side3 = this.Side(new Point[] { this.Points[1], this.Points[2] });
             double p = (side1 + side2 + side3) / 2;
-            square = Math.Sqrt(p * (p - side1) * (p - side2) * (p - side3));
-            return square;
+
+            return Math.Sqrt(p * (p - side1) * (p - side2) * (p - side3));
         }
 
         public override string ToString()
