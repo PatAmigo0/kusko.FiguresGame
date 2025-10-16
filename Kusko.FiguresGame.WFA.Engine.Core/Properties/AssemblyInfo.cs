@@ -4,33 +4,30 @@ using System.Runtime.InteropServices;
 
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
-// связанные с этой сборкой.
-[assembly: AssemblyTitle("FiguresLib.Tests")]
+// связанные со сборкой.
+[assembly: AssemblyTitle("Kusko.FiguresGame.WFA.Engine.Core")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Kuskou A.A.")]
-[assembly: AssemblyProduct("FiguresLib.Tests")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Kusko.FiguresGame.WFA.Engine.Core")]
 [assembly: AssemblyCopyright("Copyright ©  2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Установка значения False для параметра ComVisible делает типы в этой сборке невидимыми
 // для компонентов COM. Если необходимо обратиться к типу в этой сборке через
-// из модели COM задайте для атрибута ComVisible этого типа значение true.
+// COM, задайте атрибуту ComVisible значение TRUE для этого типа.
 [assembly: ComVisible(false)]
 
-// Следующий GUID представляет идентификатор typelib, если этот проект доступен из модели COM
-[assembly: Guid("51bd4b8a-05ed-49cf-aa96-f3d78755e7a6")]
+// Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
+[assembly: Guid("da88afac-5171-4346-bb95-94645eefa0c4")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //
 //      Основной номер версии
 //      Дополнительный номер версии
 //      Номер сборки
-//      Номер редакции
+//      Редакция
 //
-// Можно задать все значения или принять номера сборки и редакции по умолчанию 
-// используя "*", как показано ниже:
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

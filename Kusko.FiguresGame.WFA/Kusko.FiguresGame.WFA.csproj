@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F10FA3CB-91CF-4452-AC87-FB22ED44FF39}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>Kusko.FiguresGame.WFA</RootNamespace>
     <AssemblyName>Kusko.FiguresGame.WFA</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -32,19 +32,48 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Engine\Core\IResizeable.cs" />
-    <Compile Include="Engine\Core\IMoveable.cs" />
-    <Compile Include="Engine\Core\ChangeableFigure.cs" />
+    <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="Engine\GameFigure.cs" />
     <Compile Include="Engine\GameFigureFabric.cs" />
+    <Compile Include="UI\MainGameWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MainGameWindow.Designer.cs">
+      <DependentUpon>MainGameWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -64,7 +93,16 @@
       <Project>{51bd4b8a-05ed-49cf-aa96-f3d78755e7a6}</Project>
       <Name>FiguresLib.Tests</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kusko.FiguresGame.WFA.Engine.Core\Kusko.FiguresGame.WFA.Engine.Core.csproj">
+      <Project>{da88afac-5171-4346-bb95-94645eefa0c4}</Project>
+      <Name>Kusko.FiguresGame.WFA.Engine.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="UI\MainGameWindow.resx">
+      <DependentUpon>MainGameWindow.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

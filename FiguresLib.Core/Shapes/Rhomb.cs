@@ -17,20 +17,7 @@ namespace FiguresLib.Core.Shapes
 
         public override bool IsContainPoint(Point point)
         {
-            Triangle tr1 = new Triangle(new Point[]  { point, new Point(Points[0].X, Points[0].Y),
-                                                    new Point(Points[1].X, Points[1].Y)}, Color);
-
-            Triangle tr2 = new Triangle(new Point[]  { point, new Point(Points[1].X, Points[1].Y),
-                                                    new Point(Points[2].X, Points[2].Y)}, Color);
-
-            Triangle tr3 = new Triangle(new Point[]  { point, new Point(Points[2].X, Points[2].Y),
-                                                    new Point(Points[3].X, Points[3].Y)}, Color);
-
-            Triangle tr4 = new Triangle(new Point[]  { point, new Point(Points[3].X, Points[3].Y),
-                                                    new Point(Points[0].X, Points[0].Y)}, Color);
-
-
-            return Math.Round(tr1.Square() + tr2.Square() + tr3.Square() + tr4.Square(), 2) == Math.Round(this.Square(), 2);
+            return IsPointInPolygon(point, this.Points);
         }
 
         public override double Perimeter()
@@ -40,10 +27,26 @@ namespace FiguresLib.Core.Shapes
 
         public override double Square()
         {
-            double square = this.Side(Points[0], Points[1]) * 
-                this.Side(Points[0], Points[1]) * 
-                Math.Sqrt(3) / 2;
-            return square;
+            double diagonal1 = Points[0].Lenght(Points[2]);
+            double diagonal2 = Points[1].Lenght(Points[3]);
+            return (diagonal1 * diagonal2) / 2.0;
+        }
+
+        private bool IsPointInPolygon(Point point, Point[] polygon)
+        {
+            bool result = false;
+            int j = polygon.Length - 1;
+
+            for (int i = 0; i < polygon.Length; i++)
+            {
+                if ((polygon[i].Y < point.Y && polygon[j].Y >= point.Y || polygon[j].Y < point.Y && polygon[i].Y >= point.Y) &&
+                    (polygon[i].X + (point.Y - polygon[i].Y) / (polygon[j].Y - polygon[i].Y) * (polygon[j].X - polygon[i].X) < point.X))
+                {
+                    result = !result;
+                }
+                j = i;
+            }
+            return result;
         }
 
         public override string ToString()

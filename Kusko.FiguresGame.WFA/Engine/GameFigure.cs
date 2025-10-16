@@ -4,62 +4,51 @@ using System.Drawing;
 
 namespace Kusko.FiguresGame.WFA.Engine
 {
-    /// <summary>
-    /// представляет игровой объект, который имеет геометрическую форму и игровое состояние
-    /// </summary>
     public class GameFigure
     {
-        /// <summary>
-        /// геометрическая форма объекта
-        /// </summary>
-        public ChangeableFigure Shape { get; }
-
-        /// <summary>
-        /// текущая скорость и направление движения объекта
-        /// </summary>
+        public Figure Shape { get; set; } // Является по своей сути ChangeableFigureDecorator, хоть тут и Figure для удобства
         public PointF Velocity { get; set; }
-
-        /// <summary>
-        /// оставшееся время жизни объекта в игровых тиках
-        /// </summary>
         public int LifeTime { get; private set; }
 
-        /// <summary>
-        /// жив ли еще этот игровой объект
-        /// </summary>
-        public bool IsAlive()
-        {
-            return LifeTime > 0;
-        }
+        private readonly int _maxLifeTime;
+        private readonly Color _initialColor;
 
-        public GameFigure(ChangeableFigure shape, int lifeTime)
+        public bool IsAlive() { return LifeTime > 0; }
+
+        public GameFigure(Figure shape, int lifeTime)
         {
             Shape = shape;
             LifeTime = lifeTime;
-            Velocity = new PointF(0, 0); // начальная скорость по умолчанию
+            Velocity = new PointF(0, 0);
+            _maxLifeTime = lifeTime;
+            _initialColor = shape.Color;
         }
 
-        /// <summary>
-        /// обновляет состояние объекта на каждом кадре игры
-        /// </summary>
-        public void Update()
+        public void Update(Color backgroundColor)
         {
             if (!IsAlive()) return;
 
-            Shape.Move(Velocity.X, Velocity.Y);
-
+            if (Shape is IMoveable moveableShape)
+                moveableShape.Move(Velocity.X, Velocity.Y);
             LifeTime--;
+
+            UpdateColor(backgroundColor);
         }
 
-        /// <summary>
-        /// вычисляет количество очков за фигуру
-        /// </summary>
+        private void UpdateColor(Color background)
+        {
+            if (_maxLifeTime <= 0) return;
+
+            float lifeRatio = (float)LifeTime / _maxLifeTime;
+            int r = (int)(background.R + (_initialColor.R - background.R) * lifeRatio);
+            int g = (int)(background.G + (_initialColor.G - background.G) * lifeRatio);
+            int b = (int)(background.B + (_initialColor.B - background.B) * lifeRatio);
+            Shape.Color = Color.FromArgb(r, g, b);
+        }
+
         public int GetScore()
         {
-            double square = Shape.Square();
-            if (square == 0) return 0;
-            return (int)(10000 / square);
+            return (int)(Shape.Square() / 10.0);
         }
     }
 }
-

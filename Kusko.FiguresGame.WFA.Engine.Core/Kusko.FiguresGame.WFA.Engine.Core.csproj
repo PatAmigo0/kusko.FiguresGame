@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B8A21D5D-3222-48C2-9A73-11DCBE422D23}</ProjectGuid>
+    <ProjectGuid>{DA88AFAC-5171-4346-BB95-94645EEFA0C4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DrawLib.Platform</RootNamespace>
-    <AssemblyName>DrawLib.Platform</AssemblyName>
+    <RootNamespace>Kusko.FiguresGame.WFA.Engine.Core</RootNamespace>
+    <AssemblyName>Kusko.FiguresGame.WFA.Engine.Core</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -30,45 +30,27 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeableFigureDecorator.cs" />
+    <Compile Include="IMoveable.cs" />
+    <Compile Include="IResizeable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WFA\WFADraw.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DrawLib.Core\DrawLib.Core.csproj">
-      <Project>{2ff95f58-030c-455b-a1a9-94b2c68c50a7}</Project>
-      <Name>DrawLib.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FiguresLib.Core\FiguresLib.Core.csproj">
       <Project>{eafc9ed4-1c98-4a1f-81c8-d402b3294730}</Project>
       <Name>FiguresLib.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kusko.FiguresGame.WFA.Engine.Core\Kusko.FiguresGame.WFA.Engine.Core.csproj">
-      <Project>{da88afac-5171-4346-bb95-94645eefa0c4}</Project>
-      <Name>Kusko.FiguresGame.WFA.Engine.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

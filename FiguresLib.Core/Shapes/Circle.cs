@@ -35,7 +35,7 @@ namespace FiguresLib.Core.Shapes
             return Points[0];
         }
 
-        public new void ChangeScale(double scaleFactor)
+        public void ChangeScale(double scaleFactor)
         {
             Point center = FindCenter();
             Point radiusPoint = Points[1];
@@ -51,7 +51,7 @@ namespace FiguresLib.Core.Shapes
 
         public override string ToString()
         {
-            return $"Окружность: " + base.ToString();
+            return $"Окружность: " + base.ToString() + $", R: {this.Radius()}";
         }
     }
 }

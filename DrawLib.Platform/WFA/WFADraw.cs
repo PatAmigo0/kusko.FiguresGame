@@ -1,7 +1,10 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using FiguresLib.Core;
-using FiguresLib.Core.Shapes;
 using DrawLib.Core;
+using Kusko.FiguresGame.WFA.Engine.Core;
+using FiguresLib.Core.Shapes;
+using System.Diagnostics;
 
 namespace DrawLib.Platform.WFA
 {
@@ -16,62 +19,53 @@ namespace DrawLib.Platform.WFA
             _graphics = graphics;
         }
 
-        public void Clear()
-        {
-            _graphics.Clear(_backgroundColor);
-        }
-
-        public void Erase(Figure figure)
-        {
-            this.Draw(figure, _backgroundColor);
-        }
-
-        public void Draw(Figure figure)
-        {
-            this.Draw(figure, figure.Color);
-        }
+        public void Clear() { _graphics.Clear(_backgroundColor); }
+        public void Erase(Figure figure) { this.Draw(figure, _backgroundColor); }
+        public void Draw(Figure figure) { this.Draw(figure, figure.Color); }
 
         private void Draw(Figure figure, Color color)
         {
-            if (figure == null) return;
+            if (figure?.Points == null || figure.Points.Length == 0) return;
+
+            // если фигура является декоратором, мы извлекаем из нее исходную фигуру для отрисовки
+            Figure figureToDraw = figure;
+            if (figure is ChangeableFigureDecorator decorator)
+                figureToDraw = decorator.WrappedFigure;
+
+            var center = figureToDraw.FindCenter();
+            Debug.WriteLine($"Пытаюсь нарисовать {figureToDraw.Type} на X: {center.X:F1}, Y: {center.Y:F1}");
 
             using (Brush brush = new SolidBrush(color))
             {
-                switch (figure.Type)
+                switch (figureToDraw.Type)
                 {
                     case FigureType.Circle:
-                        var circle = (Circle)figure;
-                        int r = (int)System.Math.Round(circle.Radius());
-                        int diameter = 2 * r;
-                        int x_c = (int)circle.Points[0].X - r;
-                        int y_c = (int)circle.Points[0].Y - r;
-
-                        _graphics.FillEllipse(brush, x_c, y_c, diameter, diameter);
+                        var circle = (Circle)figureToDraw;
+                        float radius = (float)circle.Radius();
+                        _graphics.FillEllipse(brush, (float)circle.Points[0].X - radius, (float)circle.Points[0].Y - radius, radius * 2, radius * 2);
                         break;
 
                     case FigureType.Quadrant:
-                        var quadrant = (Quadrant)figure;
-                        int x_q = (int)quadrant.Points[0].X;
-                        int y_q = (int)quadrant.Points[0].Y;
-                        int side = (int)quadrant.Side();
-
-                        _graphics.FillRectangle(brush, x_q, y_q, side, side);
+                        var quadrant = (Quadrant)figureToDraw;
+                        var p1 = quadrant.Points[0];
+                        var p2 = quadrant.Points[1];
+                        _graphics.FillRectangle(brush, (float)Math.Min(p1.X, p2.X), (float)Math.Min(p1.Y, p2.Y), (float)quadrant.Side(), (float)quadrant.Side());
                         break;
 
                     case FigureType.Triangle:
                     case FigureType.Rhomb:
                     case FigureType.Hexagon:
-                        _graphics.FillPolygon(brush, GetPointsForDrawing(figure));
+                        _graphics.FillPolygon(brush, GetPointsForDrawing(figureToDraw));
                         break;
                 }
             }
         }
 
+        // вспомогательный метод
         private PointF[] GetPointsForDrawing(Figure figure)
         {
             PointF[] pointsF = new PointF[figure.Points.Length];
 
-            // конвертируем Point (с double) в PointF (с float) и добавляем в новый массив
             for (int i = 0; i < figure.Points.Length; i++)
                 pointsF[i] = new PointF((float)figure.Points[i].X, (float)figure.Points[i].Y);
 
@@ -79,4 +73,3 @@ namespace DrawLib.Platform.WFA
         }
     }
 }
-

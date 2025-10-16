@@ -5,9 +5,9 @@ namespace FiguresLib.Core
 {
     public abstract class Figure
     {
-        public Point[] Points { get; private set; }
+        public Point[] Points { get; set; }
         public FigureType Type { get; }
-        public Color Color { get; private set; }
+        public Color Color { get; set; }
 
         public Figure(Point[] points, FigureType type, Color color)
         {
@@ -40,7 +40,6 @@ namespace FiguresLib.Core
 
         public override string ToString()
         {
-            // Используем исправленное название свойства Perimeter
             return $"P = {this.Perimeter():F2}, S = {this.Square():F2}";
         }
     }

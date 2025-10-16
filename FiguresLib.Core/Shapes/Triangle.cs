@@ -17,17 +17,16 @@ namespace FiguresLib.Core.Shapes
 
         public override bool IsContainPoint(Point point)
         {
-            Triangle tr1 = new Triangle(new Point[]  { point, new Point(Points[0].X, Points[0].Y),
-                                                    new Point(Points[1].X, Points[1].Y)}, Color);
+            Point p1 = Points[0], p2 = Points[1], p3 = Points[2];
 
-            Triangle tr2 = new Triangle(new Point[]  { point, new Point(Points[1].X, Points[1].Y),
-                                                    new Point(Points[2].X, Points[2].Y)}, Color);
+            double sign1 = (p1.X - point.X) * (p2.Y - p1.Y) - (p2.X - p1.X) * (p1.Y - point.Y);
+            double sign2 = (p2.X - point.X) * (p3.Y - p2.Y) - (p3.X - p2.X) * (p2.Y - point.Y);
+            double sign3 = (p3.X - point.X) * (p1.Y - p3.Y) - (p1.X - p3.X) * (p3.Y - point.Y);
 
-            Triangle tr3 = new Triangle(new Point[]  { point, new Point(Points[0].X, Points[0].Y),
-                                                    new Point(Points[2].X, Points[2].Y)}, Color);
+            bool has_neg = (sign1 < 0) || (sign2 < 0) || (sign3 < 0);
+            bool has_pos = (sign1 > 0) || (sign2 > 0) || (sign3 > 0);
 
-
-            return Math.Round(tr1.Square() + tr2.Square() + tr3.Square(), 2) == Math.Round(this.Square(), 2);
+            return !(has_neg && has_pos);
         }
 
         public override double Perimeter()
